@@ -9,13 +9,11 @@ module.exports = function(options) {
     const attributeMode =  typeof opts.attributeMode === 'undefined' ? true : opts.attributeMode;
 	const escapeEndLines = typeof options.escapeEndLines === "undefined" ? false : options.escapeEndLines
 
-    
     const createStream = function() {
-        return new XMLtoJSONstream({attributeMode: attributeMode});
+        return new XMLtoJSONstream({attributeMode: attributeMode, escapeEndLines: escapeEndLines});
     } 
 
-
-     const xmlToJson = function(xml,cb) {
+    const xmlToJson = function(xml,cb) {
         const clean = cleanXML(xml, escapeEndLines);
 
         if(!validator(clean)) {
@@ -32,11 +30,6 @@ module.exports = function(options) {
         }
         
     }
-
-
-
-    
-
 
     return {
         createStream : createStream,
