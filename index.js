@@ -7,7 +7,7 @@ const validator = require('./lib/validator');
 module.exports = function(options) {
     const opts = options || {}
     const attributeMode =  typeof opts.attributeMode === 'undefined' ? true : opts.attributeMode;
-
+	const escapeEndLines = typeof options.escapeEndLines === "undefined" ? false : options.escapeEndLines
 
     
     const createStream = function() {
@@ -16,7 +16,7 @@ module.exports = function(options) {
 
 
      const xmlToJson = function(xml,cb) {
-        const clean = cleanXML(xml);
+        const clean = cleanXML(xml, escapeEndLines);
 
         if(!validator(clean)) {
             const err = new Error('Invalid XML. XML is missing closing or opening tag');
